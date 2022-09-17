@@ -4,24 +4,27 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JS War Game</title>
-    <link rel="stylesheet" href="main.css">
+    <title>JS WAR Game</title>
     <script src="main.js" defer></script>
 </head>
+
 <body>
-    <main class="game-space">
-        <div data-p1 class="player1">
-            <button data-p1-deck class="deck"><img src="images/card_back.jpg"/></button>
-            <div data-p1-card class="card"></div>
-            <div data-p1-war class="war"></div>
-        
-        </div>
-        <button 
-        <div data-p2 class="player2">
-            <button data-p2-deck class="deck"><img src="images/card_back.jpg"></button>
-            <div data-p2-card class="card"></div>
-            <div data-p2-war class="war"></div>
-        </div>
-    </main>
+	<h1 data-instruction class="header">Click DRAW to play a hand</h1>
+	<main class="game-space">
+		<button data-draw class="draw">DRAW</button>
+		<div data-p1 class="player1">
+			<div data-p1-count class="deckCount">(26)<div>
+			<div data-p1-deck class="deck"><img src="images/card_back.jpg"></div>
+			<div data-p1-card class="card"></div>
+			<div data-p1-war class="war"><div>
+		</div>
+			
+		<div data-p2 class="player2">
+			<div data-p2-count class="deckCount">(26)<div>
+			<div data-p2-deck class="deck"><img src="images/card_back.jpg"></div>
+			<div data-p2-card class="card"></div>
+			<div data-p2-war class="war"><div>
+		</div>
+	</main>
 </body>
 </html>
