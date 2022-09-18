@@ -61,8 +61,9 @@ The game ends when one player has won all the cards.
 			 p2val = cards[1]['value'];  // ""player 2's card
 		 }else{
 			 console.log('if more than two cards');
-			 p1val = cards[3]['value'];
-			 p2val = cards[7]['value'];
+			 //if more than two cards then they are at war and the previous played cards at the beginning of the array, use end of array position to find the current faceup card value
+			 p1val = cards[cards.length-5]['value'];
+			 p2val = cards[cards.length-1]['value'];
 		 };
 
 		 //p1val = 5;
@@ -92,8 +93,9 @@ The game ends when one player has won all the cards.
 	 };
 	 
 	 updateDeck(players){ //supposed to update the # of cards in hand
-		 for(var i = 0; i < deckCount; i++){
-			 deckCount[i].innerHTML = '('+ players[i].playerCards.length + ')';
+		console.log('updateDeck called');
+		 for(var i = 0; i < deckCount.length; i++){
+			 deckCount[i].innerText = '('+ players[i].playerCards.length + ')';
 		 };
 	 };
 
@@ -148,8 +150,15 @@ The game ends when one player has won all the cards.
 		 };
 		 setTimeout(function(){ // 3 seconds after a hand is won, it updates the instructions to the user and clears the outputs for the next round of play.
 			userInstruction.innerHTML = 'Click DRAW to play the next hand.';
-			cardOutput[0].innerText = '';
-			cardOutput[1].innerText = '';
+			//console.log(imgElement1, 'imgElement1 take');
+			cardOutput[0].innerText='';
+			cardOutput[1].innerText='';
+
+
+			warOutput[0].innerText = '';
+			warOutput[1].innerText = '';
+			//warElement1.remove();
+			//warElement2.remove();
 			//warOutput[0].innerHTML = '';
 			//warOutput[1].innerHTML = '';
 		 },3000); 
@@ -244,11 +253,24 @@ var warCheck = false; //we're not at war by default
 
 const drawButton = document.querySelector('[data-draw]');
 const cardOutput = document.querySelectorAll('.card');
+const warOutput = document.querySelectorAll('.war');
 //const warOutput = document.querySelectorAll('.war'); // will only output 3 facedown cards and 1 face up in the event of a 'War'.
 const deckCount = document.querySelectorAll('.deckCount');//to update total number of cards each player has in deck, currently not working
 const userInstruction = document.querySelector('[data-instruction]'); //top header line, displaying updated instructions/announcements to the user.
+var warElement2 = document.getElementById('war2');
+var warElement1 = document.getElementById('war1');
+var imgElement1 = document.getElementById('card1');
+var imgElement2 = document.getElementById('card2');
+
+//const decks = document.querySelectorAll('.deck');
 //const p1DeckImage = document.querySelector('[data-p1-deck]');
 //const p2DeckImage = document.querySelector('[data-p2-deck]');
+
+/* userInstruction.style.display = 'initial';
+cardOutput[0].style.display = 'initial';
+cardOutput[1].style.display = 'initial';
+decks[0].style.display = 'initial';
+decks[1].style.display = 'initial'; */
 
 drawButton.addEventListener('click', button => {
 	//for some reason player 2 html elements disappear clicking draw button. cannot figure out why
@@ -270,13 +292,15 @@ drawButton.addEventListener('click', button => {
 			if(i===0){
 				var img = document.createElement('img');
 				img.src = ("images/" + hand['rank'] + hand['suit'] + ".png");
-				var imgElement1 = document.getElementById('card1');
-				imgElement1.appendChild(img);
+
+				console.log(imgElement1,'imgElement1');
+				imgElement1.append(img);
 			}else{
 				var img2 = document.createElement('img');
 				img2.src = ("images/" + hand['rank'] + hand['suit'] + ".png");
-				var imgElement2 = document.getElementById('card2');
-				imgElement2.appendChild(img2);
+
+				console.log(img2,'img2');
+				imgElement2.append(img2);
 			};
 			
 			//img2.src = ("images/" + cards[1]['ranks'] + cards[1]['suits'] + ".png");
@@ -293,7 +317,9 @@ drawButton.addEventListener('click', button => {
 			console.log(players[k]);
 			var hand = players[k].playHandForWar(players[k]); //takes the whole player, breaks out the deck inside the function, then deals 4 cards.
 			console.log(hand, 'hand for war'); // the hand will be an array of 4 cards. 3 face down, 1 face up.
-			cardOutput[k].innerHTML = cardOutput[k].innerHTML + '; 3 FACE DOWN CARDS; ' + hand[3]['rank'] + ' of ' + hand[3]['suit']; // text div that outputs the WAR results.
+			
+			//need to update card output for images.
+			//cardOutput[k].innerHTML = cardOutput[k].innerHTML + '; 3 FACE DOWN CARDS; ' + hand[3]['rank'] + ' of ' + hand[3]['suit']; // text div that outputs the WAR results.
 			console.log('set war output',k);
 			if (k === 0){ //player1 will have an array of played hand [0-4]. passing those played cards into an array of values 0-7 depending on each player.
                             //the below hand value is representing each card's position within each player's current played hand in the WAR.
@@ -304,6 +330,23 @@ drawButton.addEventListener('click', button => {
 				currentCards[3] = hand[3];
 				console.log(currentCards, 'check current cards if first player has drawn war');
 				console.log(oldCards, 'check old cards if first player has drawn war');
+				
+				let imgFaceDown1 = document.createElement('img');
+				let imgFaceDown2 = document.createElement('img');
+				let imgFaceDown3 = document.createElement('img');
+				let imgFaceUp1 = document.createElement('img');
+				imgFaceDown1.src = ("images/card_back.jpg");
+				imgFaceDown2.src = ("images/card_back.jpg");
+				imgFaceDown3.src = ("images/card_back.jpg");
+				imgFaceUp1.src = ("images/" + hand[3]['rank'] + hand[3]['suit'] + ".png");
+
+				var warElement1 = document.getElementById('war1');
+				warElement1.prepend(imgFaceUp1);
+				warElement1.prepend(imgFaceDown1);
+				warElement1.prepend(imgFaceDown2);
+				warElement1.prepend(imgFaceDown3);
+				
+				
 			}else if (k===1){ // player two's cards are in the 8-card array as 4-7, and player1 as 0-3.
 				console.log('if k is 1');
 				currentCards[4] = hand[0];
@@ -312,6 +355,20 @@ drawButton.addEventListener('click', button => {
 				currentCards[7] = hand[3];
 				console.log(currentCards, 'check current cards if second player has drawn war');
 				console.log(oldCards, 'check old cards if second player has drawn war');
+				
+				let imgFaceDown4 = document.createElement('img');
+				let imgFaceDown5 = document.createElement('img');
+				let imgFaceDown6 = document.createElement('img');
+				let imgFaceUp2 = document.createElement('img');
+				imgFaceDown4.src = ("images/card_back.jpg");
+				imgFaceDown5.src = ("images/card_back.jpg");
+				imgFaceDown6.src = ("images/card_back.jpg");
+				imgFaceUp2.src = ("images/" + hand[3]['rank'] + hand[3]['suit'] + ".png");
+				var warElement2 = document.getElementById('war2');
+				warElement2.prepend(imgFaceUp2);
+				warElement2.prepend(imgFaceDown4);
+				warElement2.prepend(imgFaceDown5);
+				warElement2.prepend(imgFaceDown6);
 			};
 			console.log('exit loop for war from draw button');
 		};
@@ -321,7 +378,7 @@ drawButton.addEventListener('click', button => {
 		if(oldCards.length !== 0){ //if you've gone to war, it will store the tied prev played cards, and move them into the 'take-hands' function.
 			console.log('old cards if statement');
 			for(var n = 0; n<oldCards.length; n++){
-				currentCards.push(oldCards[n]); // takes the original 'tied' cards (that triggered the WAR), and places them into the total played cards array so they can be included in the 'taken-cards' when someone wins.
+				currentCards.unshift(oldCards[n]); // takes the original 'tied' cards (that triggered the WAR and if they exist previous war cards if war continues), and places them at the beginning the total played cards array so they can be included in the 'taken-cards' when someone wins.
 			};
 			oldCards = [];
 		};
@@ -329,6 +386,7 @@ drawButton.addEventListener('click', button => {
 
 	setTimeout(function(){ //gives you 3 seconds of screen time to see hand, THEN runs the compareHand function to determine results of said hand.
 		console.log('try to call compare hand');
+		console.log(warElement1, 'war element 1 before comparehand');
 		newGame.compareHand(currentCards, players); 
 	},3000);
 	

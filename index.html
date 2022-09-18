@@ -10,21 +10,26 @@
 
 <body>
 	<h1 data-instruction class="header">Click DRAW to play a hand</h1>
+	<div></div>
 	<main class="game-space">
-		<button data-draw class="draw">DRAW</button>
-		<div data-p1 class="player1">
-			<div data-p1-count class="deckCount">(26)<div>
+		<button data-draw id="player1" class="draw">DRAW</button>
+		<div></div>
+		<div data-p1 class="player">
+			<div data-p1-count class="deckCount">(26)</div>
 			<div data-p1-deck class="deck"><img src="images/card_back.jpg"></div>
 			<div data-p1-card id="card1" class="card"></div>
-			<div data-p1-war class="war"><div>
 		</div>
-			
-		<div data-p2 class="player2">
-			<div data-p2-count class="deckCount">(26)<div>
+		<div></div>
+		<div id="war1" class="war"></div>
+		<div></div>
+		<div data-p2 id="player2" class="player">
+			<div data-p2-count class="deckCount">(26)</div>
 			<div data-p2-deck class="deck"><img src="images/card_back.jpg"></div>
 			<div data-p2-card id="card2" class="card"></div>
-			<div data-p2-war class="war"><div>
 		</div>
+		<div></div>
+		<div id="war2" class="war"><div>
+		<div></div>
 	</main>
 	<script src="main.js"></script>
 </body>
