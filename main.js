@@ -273,6 +273,7 @@ decks[0].style.display = 'initial';
 decks[1].style.display = 'initial'; */
 
 drawButton.addEventListener('click', button => {
+	currentCards=[]; // resets the current cards being played right after the draw button is being clicked.
 	//for some reason player 2 html elements disappear clicking draw button. cannot figure out why
 	console.log('draw button clicked');
 	console.log(oldCards, 'check old cards at beginning of draw');
@@ -388,6 +389,7 @@ drawButton.addEventListener('click', button => {
 		console.log('try to call compare hand');
 		console.log(warElement1, 'war element 1 before comparehand');
 		newGame.compareHand(currentCards, players); 
+		
 	},3000);
 	
 	//checkWin(players)
