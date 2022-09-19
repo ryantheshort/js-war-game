@@ -95,7 +95,7 @@ The game ends when one player has won all the cards.
 	 updateDeck(players){ //supposed to update the # of cards in hand
 		console.log('updateDeck called');
 		 for(var i = 0; i < deckCount.length; i++){
-			 deckCount[i].innerText = '('+ players[i].playerCards.length + ')';
+			 deckCount[i].innerText = players[i].playerName + ' ' + '('+ players[i].playerCards.length + ')';
 		 };
 	 };
 
