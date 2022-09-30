@@ -212,7 +212,7 @@ The game ends when one player has won all the cards.
  };
 
 /* const newGame = new Game();
-const gameArr = newGame.start('Ryan','Challenger');
+const gameArr = newGame.start('Ryan','Foe');
 //const PlyrsArr = gameArr[0];
 //const CrdArry = gameArr[1];
 const playersArr = newGame.deal(gameArr[0], gameArr[1]);
@@ -231,7 +231,7 @@ for (var j = 0; j < ply1cards.length; j++){
 }; */
 
 const newGame = new Game(); //creates the Game object using the constructor inside the Game class.
-const startGame = newGame.start('Ryan','Challenger'); //starts the game, returns 2 separate players and their hands
+const startGame = newGame.start('Ryan','Foe'); //starts the game, returns 2 separate players and their hands
 var players = newGame.deal(startGame[0],startGame[1]);
 var currentCards = []; //blank array of currently 'played' cards to compare values.
 var oldCards = []; //the placevalue holder of current values of the 'tied' cards that send you to war, so more cards can be used for the war.

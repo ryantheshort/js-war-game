@@ -1,34 +1,99 @@
+
+
 body {
-    text-align: center;
+    align-content: center;
     overflow-x: hidden;
     margin: 0;
+    background: linear-gradient(#72fbfd, #5382b0);
+    height: 100vh;
+}
+.game-space {
+    background: transparent;
+}
+.col-12 {
+    text-align: center;
 }
 
 img {
-    height: 200px;
+    height: 150px;
+    width: auto;
+    max-width: 100px;
     box-shadow: 3px 3px 3px #222;
     border-radius: 10px;
+    background: transparent;
+}
+.col-6 {
     
+    justify-content: center;
+    height: 100vh;
+}
+.col-6 > #player {
+    flex-direction: row;
 }
 .game-space {
     display: inline-block;
-    width: 90%;
+    width: 100%;
     margin: auto;
+    align-content: center;
 }
-
+button {
+    
+    width: 100px;
+}
+#card1 {
+    background: transparent;
+}
+#card2 {
+    background: transparent;
+}
+#player {
+    display: flex;
+    flex-direction: row;
+}
 .player {
-    position: relative;
-    float:left;
-    text-align: center;
-    
-}
-
-/* #player1 {
-    
-    margin-left: 0;
+    background: transparent;
 }
 
 #player2 {
-    margin-left: auto;
-    margin-right: 0;
-} */
+    display: flex;
+    flex-direction: row-reverse;  
+}
+
+#war1 {
+    background: transparent;
+}
+#war2 {
+    background: transparent;
+}
+#player > #war1:nth-child(-n+3) {
+    height: 100px;
+    width: auto;
+    flex-direction: column;
+    
+}
+#player > #war1:nth-child(4n+4) {
+    
+    flex-direction: row;
+}
+#player > #war1:nth-child(n+5):nth-child(-n+7) {
+    height: 100px;
+    width: auto;
+    flex-direction: column;
+    
+}
+#player2 > #war2:nth-child(-n+3) {
+    height: 100px;
+    
+    flex-direction: column;
+    
+}
+#player2 > #war2:nth-child(4n+4) {
+    
+    flex-direction: row-reverse;
+}
+#player2 > #war2:nth-child(n+5):nth-child(-n+7) {
+    height: 100px;
+    width: auto;
+    flex-direction: column;
+    
+}
